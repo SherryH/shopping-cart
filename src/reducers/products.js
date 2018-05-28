@@ -1,10 +1,11 @@
 import { combineReducers } from "redux";
-import products from "../data";
+import productsData from "../data";
 
 // product ID is the product name in this case
+// state = {[id]:{name: productName, price: productPrice}}
 const initialProductById = (function() {
   const state = {};
-  products.forEach(product => (state[product.name] = product));
+  productsData.forEach(product => (state[product.name] = product));
   return state;
 })();
 const productById = (state = initialProductById, action) => {
@@ -14,7 +15,8 @@ const productById = (state = initialProductById, action) => {
   }
 };
 
-const initialProductAllIds = products.map(product => product.name);
+// state = [id1, id2]
+const initialProductAllIds = productsData.map(product => product.name);
 const productAllIds = (state = initialProductAllIds, action) => {
   switch (action.type) {
     default:
@@ -22,9 +24,7 @@ const productAllIds = (state = initialProductAllIds, action) => {
   }
 };
 
-// product = [{name:{name: productName, price: productPrice}}]
-// const initialProducts = products;
-export const productReducer = combineReducers({
+export const products = combineReducers({
   productById,
   productAllIds
 });

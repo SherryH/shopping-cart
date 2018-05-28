@@ -2,9 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import "./Cart.css";
 import CartItem from "./CartItem";
-import { getCart } from "../../reducers";
+import { getCart, getCartTotal } from "../../reducers";
 
-const Cart = ({ cart }) => (
+const Cart = ({ cart, cartTotal }) => (
   <React.Fragment>
     <h2>Checkout Cart</h2>
     {cart.map(({ name, price, quantity, itemTotal }) => (
@@ -16,11 +16,12 @@ const Cart = ({ cart }) => (
       />
     ))}
     <h2>Total</h2>
-    <div className="total">$380.00</div>
+    <div className="total">${cartTotal}</div>
   </React.Fragment>
 );
 
 const mapStateToProps = state => ({
-  cart: getCart(state)
+  cart: getCart(state),
+  cartTotal: getCartTotal(state)
 });
 export default connect(mapStateToProps)(Cart);
