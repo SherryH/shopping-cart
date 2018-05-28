@@ -1,0 +1,10 @@
+.cartWrapper {
+  display: grid;
+  grid-template-columns: 150px 150px 100px 100px 200px;
+  grid-gap: 10px;
+  white-space: nowrap;
+}
+
+.total {
+  text-decoration: underline;
+}
