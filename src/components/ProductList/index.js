@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import "./ProductList.css";
 import Product from "./Product";
+import { getProducts } from "../../reducers";
 
 const ProductList = ({ products }) => (
   <React.Fragment>
@@ -11,7 +12,7 @@ const ProductList = ({ products }) => (
 );
 
 const mapStateToProps = state => {
-  return { products: state.products };
+  return { products: getProducts(state) };
 };
 
 export default connect(mapStateToProps)(ProductList);

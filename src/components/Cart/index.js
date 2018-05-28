@@ -1,21 +1,26 @@
 import React from "react";
+import { connect } from "react-redux";
 import "./Cart.css";
+import CartItem from "./CartItem";
+import { getCart } from "../../reducers";
 
-const Cart = () => (
+const Cart = ({ cart }) => (
   <React.Fragment>
     <h2>Checkout Cart</h2>
-    <div className="cartWrapper">
-      <div>Axe</div>
-      <div>$190.50</div>
-      <div>x2</div>
-      <div>= 381.00</div>
-      <div>
-        <button>Remove</button>
-      </div>
-    </div>
+    {cart.map(({ name, price, quantity, itemTotal }) => (
+      <CartItem
+        name={name}
+        price={price}
+        quantity={quantity}
+        itemTotal={itemTotal}
+      />
+    ))}
     <h2>Total</h2>
     <div className="total">$380.00</div>
   </React.Fragment>
 );
 
-export default Cart;
+const mapStateToProps = state => ({
+  cart: getCart(state)
+});
+export default connect(mapStateToProps)(Cart);
