@@ -1,7 +1,7 @@
 # Shopping Cart
 This project is built with React and Redux.
 The store is persisted in the localStorage.
-
+![Shopping Cart](/img/shopping-cart.png "Shopping Cart")
 
 ## Create React App
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
