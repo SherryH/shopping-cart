@@ -1,5 +1,4 @@
 import { combineReducers } from "redux";
-import products from "../data";
 import * as productReducer from "./products";
 import * as cartReducer from "./cart";
 

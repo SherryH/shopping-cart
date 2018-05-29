@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import "./ProductList.css";
 import Product from "./Product";
@@ -13,6 +14,16 @@ const ProductList = ({ products, addProduct }) => (
     ))}
   </React.Fragment>
 );
+
+ProductList.propTypes = {
+  products: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      price: PropTypes.string.isRequired
+    })
+  ),
+  addProduct: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => {
   return { products: getProducts(state) };

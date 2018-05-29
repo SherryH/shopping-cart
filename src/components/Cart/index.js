@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import "./Cart.css";
 import CartItem from "./CartItem";
@@ -22,6 +23,19 @@ const Cart = ({ cart, cartTotal, removeProduct }) => (
     <div className="total">${cartTotal}</div>
   </React.Fragment>
 );
+
+Cart.propTypes = {
+  cart: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      price: PropTypes.string,
+      quantity: PropTypes.number,
+      itemTotal: PropTypes.string
+    })
+  ),
+  cartTotal: PropTypes.string,
+  removeProduct: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
   cart: getCart(state),
