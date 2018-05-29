@@ -1,9 +1,15 @@
 import { combineReducers } from "redux";
+import { ADD_PRODUCT } from "../constants";
 
 //state = [id1, id2]
 const initialCartAllIds = ["Axe", "Hacksaw"];
 const cartAllIds = (state = initialCartAllIds, action) => {
   switch (action.type) {
+    case ADD_PRODUCT: {
+      const newItem = action.payload;
+      if (state.includes(newItem)) return state;
+      return [...state, action.payload];
+    }
     default:
       return state;
   }
@@ -13,6 +19,11 @@ const cartAllIds = (state = initialCartAllIds, action) => {
 const initialCartById = { Axe: { quantity: 2 }, Hacksaw: { quantity: 1 } };
 const cartById = (state = initialCartById, action) => {
   switch (action.type) {
+    case ADD_PRODUCT: {
+      const newItem = action.payload;
+      const newQuantity = state[newItem] ? state[newItem].quantity + 1 : 1;
+      return { ...state, [newItem]: { quantity: newQuantity } };
+    }
     default:
       return state;
   }

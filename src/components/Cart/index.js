@@ -9,6 +9,7 @@ const Cart = ({ cart, cartTotal }) => (
     <h2>Checkout Cart</h2>
     {cart.map(({ name, price, quantity, itemTotal }) => (
       <CartItem
+        key={name}
         name={name}
         price={price}
         quantity={quantity}

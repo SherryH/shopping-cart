@@ -1,11 +1,11 @@
 import React from "react";
 
-const Product = ({ name, price }) => (
+const Product = ({ name, price, addProduct }) => (
   <div className="productWrapper">
     <div>{name}</div>
     <div>{price}</div>
     <div>
-      <button>Add</button>
+      <button onClick={() => addProduct(name)}>Add</button>
     </div>
   </div>
 );
