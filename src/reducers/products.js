@@ -5,7 +5,9 @@ import productsData from "../data";
 // state = {[id]:{name: productName, price: productPrice}}
 const initialProductById = (function() {
   const state = {};
-  productsData.forEach(product => (state[product.name] = product));
+  productsData.forEach(
+    ({ name, price }) => (state[name] = { name, price: price.toFixed(2) })
+  );
   return state;
 })();
 const productById = (state = initialProductById, action) => {

@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 import { ADD_PRODUCT, REMOVE_PRODUCT } from "../constants";
 
 //state = [id1, id2]
-const initialCartAllIds = ["Axe", "Hacksaw"];
+const initialCartAllIds = [];
 const cartAllIds = (state = initialCartAllIds, action) => {
   switch (action.type) {
     case ADD_PRODUCT: {
@@ -20,7 +20,7 @@ const cartAllIds = (state = initialCartAllIds, action) => {
 };
 
 // state={id: {quantity: productQuantity}}
-const initialCartById = { Axe: { quantity: 2 }, Hacksaw: { quantity: 1 } };
+const initialCartById = {};
 const cartById = (state = initialCartById, action) => {
   switch (action.type) {
     case ADD_PRODUCT: {
@@ -49,15 +49,17 @@ export const getCart = (products, cart) => {
     const name = productName;
     const price = products.productById[productName].price;
     const quantity = cart.cartById[productName].quantity;
-    const itemTotal = price * quantity;
+    const itemTotal = (price * quantity).toFixed(2);
     return { name, price, quantity, itemTotal };
   });
 };
 
 export const getCartTotal = (products, cart) => {
-  return cart.cartAllIds.reduce((pre, cur) => {
-    const price = products.productById[cur].price;
-    const quantity = cart.cartById[cur].quantity;
-    return pre + price * quantity;
-  }, 0);
+  return cart.cartAllIds
+    .reduce((pre, cur) => {
+      const price = products.productById[cur].price;
+      const quantity = cart.cartById[cur].quantity;
+      return pre + price * quantity;
+    }, 0)
+    .toFixed(2);
 };
