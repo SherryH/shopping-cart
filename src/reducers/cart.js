@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { ADD_PRODUCT } from "../constants";
+import { ADD_PRODUCT, REMOVE_PRODUCT } from "../constants";
 
 //state = [id1, id2]
 const initialCartAllIds = ["Axe", "Hacksaw"];
@@ -9,6 +9,10 @@ const cartAllIds = (state = initialCartAllIds, action) => {
       const newItem = action.payload;
       if (state.includes(newItem)) return state;
       return [...state, action.payload];
+    }
+    case REMOVE_PRODUCT: {
+      const unwantedItem = action.payload;
+      return state.filter(item => item !== unwantedItem);
     }
     default:
       return state;
@@ -23,6 +27,12 @@ const cartById = (state = initialCartById, action) => {
       const newItem = action.payload;
       const newQuantity = state[newItem] ? state[newItem].quantity + 1 : 1;
       return { ...state, [newItem]: { quantity: newQuantity } };
+    }
+    case REMOVE_PRODUCT: {
+      const unwantedItem = action.payload;
+      const newState = { ...state };
+      delete newState[unwantedItem];
+      return newState;
     }
     default:
       return state;
